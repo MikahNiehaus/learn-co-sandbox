@@ -18,4 +18,5 @@ puts ergo.power
 ergo.level_up
 puts ergo.power
 
+
   
