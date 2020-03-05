@@ -51,13 +51,14 @@ end
 #----------------------------------------------------------
 def search_pokemon(pokemon_search)
  # if all_pokemon.include? pokemon_search
-   if pokemon_search.downcase! == "mr. Mime"
+ pokemon_search = pokemon_search.chomp
+   if pokemon_search.downcase == "mr. mime"
    pokemon_search = "mr-mime"
- elsif pokemon_search.downcase! == "farfetch'd"
+ elsif pokemon_search.downcase == "farfetch'd"
  pokemon_search = "farfetchd"
- elsif pokemon_search.downcase! == "nidoran♂"
+ elsif pokemon_search.downcase == "nidoran♂"
   pokemon_search = "nidoran"
-  elsif pokemon_search.downcase! == "nidoran♀"
+  elsif pokemon_search.downcase == "nidoran♀"
   pokemon_search = "nidoran"
 end
   wiki_doc = Nokogiri::HTML(open("https://www.pokemon.com/us/pokedex/"+ pokemon_search.chomp))
@@ -66,15 +67,19 @@ pokemon_discription.chomp
 new_pokemon_discription = ""
 out = false
 pok = pokemon_discription.split('')
+count = 0
 pok.each do |c|
- # binding.pry
- if c == "."
-  out = true
-end
   if out == false && c != "\n"
   new_pokemon_discription += c
 end
+ if c == "."
+  count += 1
 end
+if count == 2
+  out = true
+end
+end
+count = 0
 out = false
 puts new_pokemon_discription
 end
@@ -108,15 +113,17 @@ puts "Pokémon!"
 #this is a loop so you can keep playting the game till you want to exit
 while out == false
 puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
-input = gets
+input = gets.chop
 #this is an if else statment that will get the useres input to run different progams in Pokemon class
 if input.chomp == "1".chomp
  puts pokemon.names
  elsif input.chomp == "2".chomp
  puts "Enter pokemon's Name:"
- x = gets
+ x = gets.chomp
+ x += "\n"
  if pokemon.names.include?(x.downcase)
 pokemon.search_pokemon(x)
+
 else
   error
 end
