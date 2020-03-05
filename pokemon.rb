@@ -1,22 +1,18 @@
+#gets everything that is required
+#----------------------------------------------------------
 require "pry"
 require 'nokogiri'
 require 'open-uri'
-#----------------------------------------------------------
-out = false
-
-
-#----------------------------------------------------------
-
+#This is my Pokemon class and is used for everything pertaning to Pokemon
+#----------------------------------------------------------#----------------------------------------------------------
 class Pokemon
  attr_writer :names
-
 @@caught_pokemon = []
 @@all_pokemon = []
 def names
   get_names
 @names = @@all_pokemon
 end
-  
   def caught_pokemon=(caught_pokemon)
    # @@caught_pokemon << caught_pokemon
     @caught_pokemon = caught_pokemon
@@ -25,7 +21,8 @@ end
   def caught_pokemon
     @@caught_pokemon
   end
-  
+#running this will update @@all_pokemon with wikipedia 
+#----------------------------------------------------------  
 	def get_names
 	  @@all_pokemon = []
 	  count = 0
@@ -37,7 +34,6 @@ if out == false && pokemon.chomp != "vtePokémon species" && count == 0
    @@all_pokemon << pokemon[1..-1].downcase
   # uncaught_pokemon << pokemon[1..-1].downcase
    count = 1
- 
  else
    count = 0
  end
@@ -51,7 +47,8 @@ out = false
  @@all_pokemon.pop()
  
 end
-
+#this goggles the pokedex and finds the pokemon discription
+#----------------------------------------------------------
 def search_pokemon(pokemon_search)
  # if all_pokemon.include? pokemon_search
    if pokemon_search.downcase! == "fr. Mime"
@@ -63,31 +60,27 @@ def search_pokemon(pokemon_search)
   elsif pokemon_search.downcase! == "nidoran♀"
   pokemon_search = "nidoran"
 end
-
   wiki_doc = Nokogiri::HTML(open("https://www.pokemon.com/us/pokedex/"+ pokemon_search.chomp))
 pokemon_discription = wiki_doc.css('.version-y').text
 pokemon_discription.chomp
 new_pokemon_discription = ""
 out = false
-
 pok = pokemon_discription.split('')
 pok.each do |c|
  # binding.pry
  if c == "."
   out = true
 end
-
   if out == false && c != "\n"
   new_pokemon_discription += c
 end
-
 end
 out = false
-
 puts new_pokemon_discription
-
 end
 
+#this catches a new pokemon by random
+#---------------------------------------------------------
 def catch_pokemon
   get_names
    x = @@all_pokemon.length  
@@ -102,27 +95,21 @@ search_pokemon(new_pokemon)
 end
 
 	 end
-#---------------------------------------------------------- 
-pokemon = Pokemon.new
-#binding.pry
+#I run this code whenever there is an error
 #---------------------------------------------------------
-
-
 def error
   puts "Input not recognized" 
 end
-
-
- 
-
-
-#-----------------------------------------------------------------------
-
-
+#This creates Pokemon.new and is where the program starts
+#-----------------------------------------------------------------------#-----------------------------------------------------------------------
+out = false
+pokemon = Pokemon.new
 puts "Pokémon!"
+#this is a loop so you can keep playting the game till you want to exit
 while out == false
 puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
 input = gets
+#this is an if else statment that will get the useres input to run different progams in Pokemon class
 if input.chomp == "1".chomp
  puts pokemon.names
  elsif input.chomp == "2".chomp
@@ -133,7 +120,6 @@ pokemon.search_pokemon(x)
 else
   error
 end
-
 elsif input.chomp == "3".chomp
 if pokemon.caught_pokemon.length != 0
 puts pokemon.caught_pokemon
