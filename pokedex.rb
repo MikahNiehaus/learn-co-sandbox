@@ -5,8 +5,6 @@ require 'open-uri'
 count = 0
 all_pokemon = []
 out = true
-caught_pokemon = []
-uncaught_pokemon = []
 doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
 
 
@@ -48,7 +46,7 @@ end
 
 puts "Pokémon!"
 while out == false
-puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
+puts "List all Pokemon[1] Look at pokemon[2] Escape[e]"
 input = gets
 if input.chomp == "1".chomp
  puts all_pokemon
@@ -56,15 +54,6 @@ if input.chomp == "1".chomp
  puts "Enter pokemon's English Name:"
  x = gets
 search_pokemon(x)
-elsif input.chomp == "3".chomp
-puts caught_pokemon
-elsif input.chomp == "4".chomp
- x = uncaught_pokemon.length  
-  num = rand(0...x)
-new_pokemon = uncaught_pokemon[num]
-puts "you caught a #{new_pokemon}"
-caught_pokemon << new_pokemon
-uncaught_pokemon.delete(new_pokemon)
 elsif input.chomp == "e".chomp
 out = true
 else
