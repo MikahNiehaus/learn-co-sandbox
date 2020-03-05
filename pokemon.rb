@@ -51,7 +51,7 @@ end
 #----------------------------------------------------------
 def search_pokemon(pokemon_search)
  # if all_pokemon.include? pokemon_search
-   if pokemon_search.downcase! == "fr. Mime"
+   if pokemon_search.downcase! == "mr. Mime"
    pokemon_search = "mr-mime"
  elsif pokemon_search.downcase! == "farfetch'd"
  pokemon_search = "farfetchd"
