@@ -1,6 +1,6 @@
 #gets everything that is required
 #----------------------------------------------------------
-require "pry"
+#require "pry"
 require 'nokogiri'
 require 'open-uri'
 #This is my Pokemon class and is used for everything pertaning to Pokemon
