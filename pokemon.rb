@@ -9,6 +9,7 @@ class Pokemon
  attr_writer :names
 @@caught_pokemon = []
 @@all_pokemon = []
+@@allready_updated = false
 def names
   get_names
 @names = @@all_pokemon
@@ -21,9 +22,10 @@ end
   def caught_pokemon
     @@caught_pokemon
   end
-#running this will update @@all_pokemon with wikipedia 
+#running this will update or return @@all_pokemon with wikipedia 
 #----------------------------------------------------------  
 	def get_names
+	  if @@allready_updated == false
 	  @@all_pokemon = []
 	  count = 0
 out = true
@@ -45,6 +47,10 @@ end
 end
 out = false
  @@all_pokemon.pop()
+ allready_updateed = true
+ else
+   @@all_pokemon
+ end
  
 end
 #this goggles the pokedex and finds the pokemon discription
@@ -52,18 +58,22 @@ end
 def search_pokemon(pokemon_search)
  # if all_pokemon.include? pokemon_search
  pokemon_search = pokemon_search.chomp
+
    if pokemon_search.downcase == "mr. mime"
    pokemon_search = "mr-mime"
  elsif pokemon_search.downcase == "farfetch'd"
  pokemon_search = "farfetchd"
- elsif pokemon_search.downcase == "nidoran♂"
-  pokemon_search = "nidoran"
   elsif pokemon_search.downcase == "nidoran♀"
-  pokemon_search = "nidoran"
+  pokemon_search = "nidoran-female"
+  elsif pokemon_search.downcase == "nidoran♂" || pokemon_search.downcase == "nidoran"
+  pokemon_search = "nidoran-male"
 end
+#binding.pry
   wiki_doc = Nokogiri::HTML(open("https://www.pokemon.com/us/pokedex/"+ pokemon_search.chomp))
+  
 pokemon_discription = wiki_doc.css('.version-y').text
 pokemon_discription.chomp
+#gets rid of repeating text error
 new_pokemon_discription = ""
 out = false
 pok = pokemon_discription.split('')
