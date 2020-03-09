@@ -3,15 +3,16 @@
 #require "pry"
 require 'nokogiri'
 require 'open-uri'
+$out = false
 #This is my Pokemon class and is used for everything pertaning to Pokemon
 #----------------------------------------------------------#----------------------------------------------------------
 class Pokemon
- attr_writer :names
+ attr_writer :names, :class_name
 @@caught_pokemon = []
 @@all_pokemon = []
 def names
   get_names
-  @class_name = class_name
+ 
 @names = @@all_pokemon
 end
   def caught_pokemon=(caught_pokemon)
@@ -29,11 +30,11 @@ end
 	def get_names
 	  @@all_pokemon = []
 	  count = 0
-out = true
+$out = true
 doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
 doc.css('th').each do |item|
   pokemon = item.text
-if out == false && pokemon.chomp != "vtePokémon species" && count == 0 
+if $out == false && pokemon.chomp != "vtePokémon species" && count == 0 
    @@all_pokemon << pokemon[1..-1].downcase
   # uncaught_pokemon << pokemon[1..-1].downcase
    count = 1
@@ -41,12 +42,12 @@ if out == false && pokemon.chomp != "vtePokémon species" && count == 0
    count = 0
  end
  if pokemon.chomp == "Secondary"
-   out = false
+   $out = false
    elsif pokemon.chomp == "vtePokémon species"
-   out = true
+   $out = true
 end
 end
-out = false
+$out = false
  @@all_pokemon.pop()
  
 end
@@ -68,22 +69,22 @@ end
 pokemon_discription = wiki_doc.css('.version-y').text
 pokemon_discription.chomp
 new_pokemon_discription = ""
-out = false
+$out = false
 pok = pokemon_discription.split('')
 count = 0
 pok.each do |c|
-  if out == false && c != "\n"
+  if $out == false && c != "\n"
   new_pokemon_discription += c
 end
  if c == "."
   count += 1
 end
 if count == 2
-  out = true
+  $out = true
 end
 end
 count = 0
-out = false
+$out = false
 puts new_pokemon_discription
 end
 
@@ -111,10 +112,10 @@ end
 #This creates Pokemon.new and is where the program starts
 #---------------------------------------------------------------------------------------------------------------------------------------------
 Pokemon.intro
-out = false
+$out = false
 pokemon = Pokemon.new
 #this is a loop so you can keep playting the game till you want to exit
-while out == false
+while $out == false
 puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
 input = gets.chop
 #this is an if else statment that will get the useres input to run different progams in Pokemon class
@@ -139,7 +140,7 @@ end
 elsif input.chomp == "4".chomp
 pokemon.catch_pokemon
 elsif input.chomp == "e".chomp
-out = true
+$out = true
 else
  error
 end
