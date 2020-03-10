@@ -1,12 +1,11 @@
-
-class PlayPokemon::Pokemon
+class PokemonGame::Pokemon
   $out = false
   attr_writer :names, :class_name
 @@caught_pokemon = []
 @@all_pokemon = []
 def names
   get_names
- 
+  
 @names = @@all_pokemon
 end
   def caught_pokemon=(caught_pokemon)
@@ -96,5 +95,7 @@ search_pokemon(new_pokemon)
 @@caught_pokemon << new_pokemon
 
 end
-
+ def error
+  puts "Input not recognized" 
+end
 end
