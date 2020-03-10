@@ -1,8 +1,15 @@
 # PokemonGame
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pokemon_game`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the amazing world of Pokémon! Simply enter ruby pokemon.rb to start game.
+When game start you will have these options. 
+List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]
+Put the fallowing input to get the following output
 
-TODO: Delete this and the text above, and describe your gem
+[1]  will find all of gen 1 pokemon from wiki and will list them all out
+[2] copy and past the name of the pokemon you want to look up the description of
+[3] lists all pokemon you have caught 
+[4] catch a new random pokemon and view its description
+[e] escape/end game
 
 ## Installation
 
