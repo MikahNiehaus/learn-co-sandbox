@@ -2,7 +2,7 @@
 class PokemonGame::PlayPokemon
   
   def call
-        pokemon = PokemonGame::Pokemon.new
+pokemon = PokemonGame::Pokemon.new
     
 $out = false
 
@@ -19,7 +19,6 @@ x = gets.chomp
 x += "\n"
 if pokemon.names.include?(x.downcase)
 pokemon.search_pokemon(x)
-
 else
   error
 end
