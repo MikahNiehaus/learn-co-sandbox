@@ -1,12 +1,12 @@
-
 class PokemonGame::PlayPokemon
   
   def call
 pokemon = PokemonGame::Pokemon.new
     
-$out = false
+scrape
 
 #this is a loop so you can keep playting the game till you want to exit
+$out = false
 while $out == false
 puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
 input = gets.chop
@@ -44,8 +44,49 @@ end
   puts "Input not recognized" 
 end
     
- 
+ def scrape
+   count = 0
+    all_pokemon_names = []
+    all_pokemon_description = []
 
+#gets all_pokemon_names
+   doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
+#this gets each pokemon
+doc.css('tbody tr th span').each do |item|
+  pokemon = item.attributes["id"] 
+# description = item.css('tbody tr td').text
+  #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
+  if pokemon != nil
+ # puts pokemon
+  count += 1
+  all_pokemon_names << pokemon
+end#end if
+
+ end#end each
+ puts count
+ count = 0
+#gets all_pokemon_description
+   doc.css('tbody tr').each do |item|
+ description = item.text
+  #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
+  if description != nil
+ # puts description
+  all_pokemon_description << description
+  count += 1
+end#end if
+   
+ end#end each
+  puts count
+
+#creats classes
+ puts all_pokemon_names[0]
+ puts all_pokemon_description[2]
+# count.each do |ary_num|
+  
+# end#end each
+
+
+end#end scrape
 
 end
     

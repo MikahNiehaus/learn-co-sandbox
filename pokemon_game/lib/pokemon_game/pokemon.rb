@@ -4,6 +4,8 @@ class PokemonGame::Pokemon
   attr_writer :names, :class_name
 @@caught_pokemon = []
 @@all_pokemon = []
+
+
 def names
   get_names
   
@@ -29,7 +31,7 @@ $out = true
 #then I scrape the text form wikipedia
 doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
 #this gets each pokemon
-doc.css('th').each do |item|
+doc.css('tbody tr').each do |item|
   pokemon = item.text
   #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
 if $out == false && pokemon.chomp != "vtePokémon species" && count == 0 
@@ -50,7 +52,7 @@ $out = false
 #this just cuts off an unnessesery thing form the list and returns what is left
 @@all_pokemon.pop()
  else
-   @@all_pokemon
+   @@all_pokemom
  end
 end
 #this goggles the pokedex and finds the pokemon discription
