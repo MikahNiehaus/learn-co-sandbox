@@ -1,7 +1,7 @@
 class PokemonGame::PlayPokemon
   
   def call
-pokemon = PokemonGame::Pokemon.new
+
     
 scrape
 
@@ -12,7 +12,7 @@ puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Po
 input = gets.chop
 #this is an if else statment that will get the useres input to run different progams in Pokemon class
 if input.chomp == "1".chomp
-puts pokemon.names
+puts PokemonGame::Pokemon.all
 elsif input.chomp == "2".chomp
 puts "Enter pokemon's Name:"
 x = gets.chomp
@@ -63,8 +63,8 @@ doc.css('tbody tr th span').each do |item|
 end#end if
 
  end#end each
- puts count
- count = 0
+
+ 
 #gets all_pokemon_description
    doc.css('tbody tr').each do |item|
  description = item.text
@@ -72,18 +72,22 @@ end#end if
   if description != nil
  # puts description
   all_pokemon_description << description
-  count += 1
+  
 end#end if
    
  end#end each
   puts count
 
 #creats classes
- puts all_pokemon_names[0]
- puts all_pokemon_description[2]
-# count.each do |ary_num|
+
   
-# end#end each
+while count != -1
+
+PokemonGame::Pokemon.new(all_pokemon_names[count],all_pokemon_description[count+2])
+
+count -= 1
+end#end while
+count = 0
 
 
 end#end scrape
