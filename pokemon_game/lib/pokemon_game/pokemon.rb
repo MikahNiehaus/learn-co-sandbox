@@ -6,7 +6,7 @@ attr_accessor :name, :description
 def initialize(name,description)
    self.name = name
    self.description = description
-   @@all << name
+   @@all << name.to_s
 end#end initialize
 
 def self.all
@@ -15,7 +15,6 @@ end#end all
 
 def self.random_pokemon
   self.all.sample
-  
 end#end random_pokemon
 
 end#end class

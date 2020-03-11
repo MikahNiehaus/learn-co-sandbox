@@ -7,6 +7,7 @@ scrape
 
 #this is a loop so you can keep playting the game till you want to exit
 $out = false
+$caught_pokemon = []
 while $out == false
 puts "List all Pokemon[1] Look at pokemon[2] Look at caught Pokemon [3] Catch Pokémon [4] Escape[e]"
 input = gets.chop
@@ -16,20 +17,17 @@ puts PokemonGame::Pokemon.all
 elsif input.chomp == "2".chomp
 puts "Enter pokemon's Name:"
 x = gets.chomp
-x += "\n"
-if pokemon.names.include?(x.downcase)
-pokemon.search_pokemon(x)
-else
-  error
-end
+pokemon_search(x)
 elsif input.chomp == "3".chomp
-if pokemon.caught_pokemon.length != 0
-puts pokemon.caught_pokemon
+if $caught_pokemon.length != 0
+puts $caught_pokemon
 else
   puts "You have no pokemon"
 end
 elsif input.chomp == "4".chomp
-pokemon.catch_pokemon
+random_pokemon = PokemonGame::Pokemon.random_pokemon
+$caught_pokemon << random_pokemon
+pokemon_search(random_pokemon)
 elsif input.chomp == "e".chomp
 $out = true
 else
@@ -39,6 +37,16 @@ end
 end
   end
 
+  def pokemon_search(x)
+    my_all = PokemonGame::Pokemon.all
+  if my_all.include?(x)
+num = my_all.index(x) 
+
+puts $all_pokemon_description[154-num] + "\n"
+else
+  error
+end
+end
   
  def error
   puts "Input not recognized" 
@@ -47,7 +55,7 @@ end
  def scrape
    count = 0
     all_pokemon_names = []
-    all_pokemon_description = []
+    $all_pokemon_description = []
 
 #gets all_pokemon_names
    doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
@@ -71,7 +79,7 @@ end#end if
   #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
   if description != nil
  # puts description
-  all_pokemon_description << description
+  $all_pokemon_description << description
   
 end#end if
    
@@ -83,7 +91,7 @@ end#end if
   
 while count != -1
 
-PokemonGame::Pokemon.new(all_pokemon_names[count],all_pokemon_description[count+2])
+PokemonGame::Pokemon.new(all_pokemon_names[count],$all_pokemon_description[count+2])
 
 count -= 1
 end#end while
