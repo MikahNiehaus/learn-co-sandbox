@@ -6,8 +6,5 @@ require_relative './pokemon_game/play-pokemon'
 require_relative './pokemon_game/pokemon'
 
 
-# module PokemonGame
-#   class Error < StandardError; end
-#   # Your code goes here...
-# end
-
+# gem install pry
+# gem install nokogiri
