@@ -2,7 +2,7 @@
 #instanse vs class meth..
 #single responcible varuble
 #creat just scraper class!
-
+#Make sure every class does one thing
 class PokemonGame::PlayPokemon
   
   def call
@@ -65,13 +65,14 @@ end
   puts "Input not recognized" 
 end
 
- def nokogiri
-   Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
- end
+# def nokogiri
+#   Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
+# end
 
 def creat_pokemon
- all_pokemon_names = scrape('tbody tr th span',true)
- all_pokemon_description = scrape('tbody tr',false)
+
+ all_pokemon_names = PokemonGame::Scraper.scrape('tbody tr th span',true)
+ all_pokemon_description = PokemonGame::Scraper.scrape('tbody tr',false)
  count = 152 
   while count != -1
 PokemonGame::Pokemon.new(all_pokemon_names[count],all_pokemon_description[count+2])
@@ -84,35 +85,35 @@ count = 0
 end#creat_pokemon
 
   
- def scrape(location,get_id)
-   output = []
-      doc = nokogiri
-   if get_id == true
-#this gets each pokemon
-doc.css(location).each do |item|
-  pokemon = item.attributes["id"] 
-# description = item.css('tbody tr td').text
-  #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
-  if pokemon != nil
- # puts pokemon
-  output << pokemon
-end#pokemon if
- end#css each
-else#get_id
+# def scrape(location,get_id)
+#   output = []
+#       doc = nokogiri
+#   if get_id == true
+# #this gets each pokemon
+# doc.css(location).each do |item|
+#   pokemon = item.attributes["id"] 
+# # description = item.css('tbody tr td').text
+#   #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
+#   if pokemon != nil
+# # puts pokemon
+#   output << pokemon
+# end#pokemon if
+# end#css each
+# else#get_id
 
-#gets all_pokemon_description
-   doc.css(location).each do |item|
- description = item.text
-  #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
-  if description != nil
- # puts description
-  output << description
-end#description if
- end#css each
-end#get_id if
+# #gets all_pokemon_description
+#   doc.css(location).each do |item|
+# description = item.text
+#   #this cuts out unnessesery parts of the list form wikipedia and makes sure its not added to @@all_pokemon
+#   if description != nil
+# # puts description
+#   output << description
+# end#description if
+# end#css each
+# end#get_id if
 
-output
-end#scrape
+# output
+# end#scrape
 
   
 
