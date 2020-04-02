@@ -65,9 +65,13 @@ end
   puts "Input not recognized" 
 end
 
+<<<<<<< HEAD
 # def nokogiri
 #   Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_generation_I_Pok%C3%A9mon"))
 # end
+=======
+
+>>>>>>> 2d8314942773e922dbd6db64ae852cdfd08dab92
 
 def creat_pokemon
 
@@ -84,6 +88,7 @@ count = 0
 
 end#creat_pokemon
 
+<<<<<<< HEAD
   
 # def scrape(location,get_id)
 #   output = []
@@ -114,6 +119,8 @@ end#creat_pokemon
 
 # output
 # end#scrape
+=======
+>>>>>>> 2d8314942773e922dbd6db64ae852cdfd08dab92
 
   
 
