@@ -1,0 +1,24 @@
+<h1>Update Topic</h1>
+
+<form action="/topics/<%=@topic.id%>" method="POST">
+  <label>Name:</label>
+
+  <br></br>
+
+  <input type="text" name="topic[name]" id="topic_name" value="<%=@topic.name%>">
+  <br></br>
+  <label>Choose an existing post:</label>
+  <br></br>
+  <%Post.all.each do |the_post|%>
+    <input type="checkbox" name="topic[post_ids][]" id="<%= the_post.id%>" value="<%=the_post.id%>" <%='checked' if @topic.posts.include?(the_post) %>><%=the_post.name%></input>
+  <%end%>
+
+  <br></br>
+
+  <label>and/or, create a new post:</label>
+  <br></br>
+  <label>name:</label>
+    <input  type="text" name="post[name]" id="post_name"></input>
+  <br></br>
+  <input type="submit" value="Update Topic">
+</form>

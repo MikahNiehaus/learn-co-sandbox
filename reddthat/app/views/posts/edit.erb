@@ -1,0 +1,25 @@
+
+    <meta charset="utf-8">
+    <title>Edit</title>
+  </head>
+  <body>
+    <form action="/posts/<%=@post.id%>" method="post">
+      <label>Name:</label>
+      <br>
+      <input type="text" name="post[name]" value="<%=@post.name%>" id="post_name">
+      <br>
+      <label>Choose an existing topic:</label>
+      <br>
+         <%@topics.each do |topic|%>
+      <input type="radio" name="post[topic_id]" id="<%= topic.id %>" value="<%= topic.id %>" <%= 'checked' if @post.topic == topic %>><%= topic.name %></input>
+    <%end%>
+      <br>
+      <label>and/or, create a new topic:</label>
+      <br>
+      <label>Name:</label>
+      <br>
+      <input type="text" name="topic[name]" id="topic_name">
+      <br>
+      <input type="submit" value="Update Post">
+    </form>
+  </body>
