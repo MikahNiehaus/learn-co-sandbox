@@ -1,7 +1,7 @@
-<h1><%=@topic.name%></h1>
+<h1><%=@topic.text%></h1>
 <h4>Posts:</h4>
 <ul>
   <%@topic.posts.each do |the_post|%>
-  <li><%=the_post.name%></li>
+  <li><%=the_post.text%></li>
   <%end%>
 </ul>

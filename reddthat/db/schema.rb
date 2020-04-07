@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2016_08_23_053742) do
 
-  create_table "owners", force: :cascade do |t|
-    t.string "name"
+  create_table "posts", force: :cascade do |t|
+    t.string "text"
+    t.integer "topic_id"
   end
 
-  create_table "pets", force: :cascade do |t|
-    t.string "name"
-    t.integer "owner_id"
+  create_table "topics", force: :cascade do |t|
+    t.string "text"
   end
 
   create_table "users", force: :cascade do |t|

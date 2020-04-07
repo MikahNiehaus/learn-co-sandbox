@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
   else
      redirect to "/failure"
    end
-  end
+  end 
 
   get '/topics/new' do
     # binding.pry
@@ -24,9 +24,11 @@ class TopicsController < ApplicationController
 
   post '/topics' do
      if logged_in? 
+      # binding.pry
     @topic = Topic.create(params[:topic])
-    if !params["post"]["name"].empty?
-      @topic.posts << Post.create(name: params["post"]["name"])
+    
+    if !params["post"]["text"].empty?
+      @topic.posts << Post.create(text: params["post"]["text"])
     end
     @topic.save
     redirect "topics/#{@topic.id}"
@@ -47,6 +49,7 @@ class TopicsController < ApplicationController
 
   get '/topics/:id' do
       if logged_in? 
+        # binding.pryp
     @topic = Topic.find(params[:id])
     erb :'/topics/show'
        else
@@ -58,8 +61,8 @@ class TopicsController < ApplicationController
       if logged_in? 
     @topic = Topic.find(params[:id])
     @topic.update(params["topic"])
-    if !params["post"]["name"].empty?
-      @topic.posts << Post.create(name: params["post"]["name"])
+    if !params["post"]["text"].empty?
+      @topic.posts << Post.create(text: params["post"]["text"])
     end
     redirect to "topics/#{@topic.id}"
       else

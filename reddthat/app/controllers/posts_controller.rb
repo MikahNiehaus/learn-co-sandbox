@@ -24,8 +24,8 @@ class PostsController < ApplicationController
   post '/posts' do
     if logged_in? 
     @post = Post.create(params[:post])
-    if !params["topic"]["name"].empty?
-      @post.topic = Topic.create(name: params["topic"]["name"])
+    if !params["topic"]["text"].empty?
+      @post.topic = Topic.create(text: params["topic"]["text"])
     end
     @post.save
     redirect to "posts/#{@post.id}"
@@ -59,8 +59,8 @@ get '/posts/:id/edit' do
       if logged_in? 
     @post = Post.find(params[:id])
     @post.update(params["post"])
-    if !params["topic"]["name"].empty?
-      @post.topic = Topic.create(name: params["topic"]["name"])
+    if !params["topic"]["text"].empty?
+      @post.topic = Topic.create(text: params["topic"]["text"])
     end
     @post.save
     redirect to "posts/#{@post.id}"

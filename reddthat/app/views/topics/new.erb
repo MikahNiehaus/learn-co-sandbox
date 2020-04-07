@@ -1,24 +1,18 @@
 <h1>Create a new Topic</h1>
 
 <form action="/topics" method="POST">
-  <label>Name:</label>
+  <label>Text:</label>
 
   <br></br>
 
-  <input type="text" name="topic[name]">
+  <input type="text" name="topic[text]">
 
   <br></br>
 
-  <label>Choose an existing post:</label>
-
+  <label>Create a new post:</label>
   <br></br>
-
-  <br></br>
-
-  <label>and/or, create a new post:</label>
-  <br></br>
-  <label>name:</label>
-    <input type="text" name="post[name]"></input>
+  <label>text:</label>
+    <input type="text" name="post[text]"></input>
     <br></br>
 
   <input type="submit" value="Create Topic">
