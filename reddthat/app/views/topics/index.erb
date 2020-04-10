@@ -1,1 +1,6 @@
+<% if logged_in?%>
+
 index.erb
+<% else %>
+<% redirect to "/failure" %>
+<% end %>

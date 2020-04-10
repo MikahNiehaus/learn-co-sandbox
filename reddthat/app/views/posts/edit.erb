@@ -1,3 +1,4 @@
+<% if logged_in?%>
 
     <meta charset="utf-8">
     <title>Edit</title>
@@ -23,3 +24,6 @@
       <input type="submit" value="Update Post">
     </form>
   </body>
+<% else %>
+<% redirect to "/failure" %>
+<% end %>
