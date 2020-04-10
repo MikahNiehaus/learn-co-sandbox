@@ -1,6 +1,15 @@
-<% if logged_in?%>
 
-index.erb
+<% if logged_in?%>
+<h1>Choose a Topic</h1>
+
+  <% @topics.each do |topic| %>
+   <br>
+    <!--<input type="submit" name="post[topic_id]" value="<%=topic.id%>" id="<%=topic.id%>"><%= topic.text %> </input>-->
+   
+      <a  href="/topics/<%=topic.id%>"><%= topic.text %></a>
+     <br>
+  <% end %>
+   <br>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>
