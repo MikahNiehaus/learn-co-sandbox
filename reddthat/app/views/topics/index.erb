@@ -4,12 +4,11 @@
 
   <% @topics.each do |topic| %>
    <br>
-    <!--<input type="submit" name="post[topic_id]" value="<%=topic.id%>" id="<%=topic.id%>"><%= topic.text %> </input>-->
-   
       <a  href="/topics/<%=topic.id%>"><%= topic.text %></a>
      <br>
   <% end %>
-   <br>
+   <br></br>
+<p><a href="/logout">Log Out</a></p>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>

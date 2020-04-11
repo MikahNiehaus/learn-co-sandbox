@@ -12,14 +12,7 @@ class PostsController < ApplicationController
     erb :'/posts/new'
   end
 
-  post '/posts' do
-    @post = Post.create(params[:post])
-    if !params["topic"]["text"].empty?
-      @post.topic = Topic.create(text: params["topic"]["text"])
-    end
-    @post.save
-    redirect to "posts/#{@post.id}"
-  end
+
 
   get '/posts/:id' do
     @post = Post.find(params[:id])
