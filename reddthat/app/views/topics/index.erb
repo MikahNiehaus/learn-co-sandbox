@@ -3,11 +3,12 @@
 <h1>Choose a Topic</h1>
 
   <% @topics.each do |topic| %>
-   <br>
+   
       <a  href="/topics/<%=topic.id%>"><%= topic.text %></a>
      <br>
   <% end %>
-   <br></br>
+  <br>
+  <p><a href="/topics/new">Create new topic</a></p>
 <p><a href="/logout">Log Out</a></p>
 <% else %>
 <% redirect to "/failure" %>
