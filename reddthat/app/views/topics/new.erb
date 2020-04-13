@@ -1,9 +1,10 @@
 <% if logged_in?%>
 
-  
-<h1>Create a new Topic</h1>
-
 <form action="/topics" method="POST">
+  <h1>Create a new Topic</h1>
+   
+
+   <br></br>
   <label>Text:</label>
 
 
@@ -15,7 +16,8 @@
  
   <label>Text:</label>
     <input type="text" name="post[text]"></input>
-
+<input type="hidden" name="topic[user_id]" value="<%=current_user.id%>"></input>
+<input type="hidden" name="post[user_id]" value="<%=current_user.id%>"></input>
   <input type="submit" value="Create Topic">
 </form>
 </br>

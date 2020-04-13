@@ -1,3 +1,4 @@
+<%require 'pry'%>
 <% if logged_in?%>
 
 <h1>Update Topic</h1>
@@ -11,7 +12,12 @@
   <br></br>
   <label>Choose an existing post:</label>
   <br></br>
-  <%Post.all.each do |the_post|%>
+  <%binding.pry%>
+  <%     @topic = Topic.find(params[:id])%>
+    <% # if Post.find(params[:topic_id]) != nil  %> 
+    <% @posts = Post.find(params[:topic_id]) %>
+    <% #end  %>
+  <%@posts.all.each do |the_post|%>
     <input type="checkbox" name="topic[post_ids][]" id="<%= the_post.id%>" value="<%=the_post.id%>" <%='checked' if @topic.posts.include?(the_post) %>><%=the_post.text%></input>
   <%end%>
 
@@ -24,6 +30,7 @@
   <br></br>
   <input type="submit" value="Update Topic">
 </form>
+  <p><a href="/topics/<%=@topic.id%>">Go Back</a></p>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>
