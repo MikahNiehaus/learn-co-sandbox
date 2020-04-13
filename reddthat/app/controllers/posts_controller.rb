@@ -12,10 +12,10 @@ class PostsController < ApplicationController
     @topic.save
     redirect "topics/#{@topic.id}"
   end
-   # get '/posts' do
-  #   @posts = Post.all
-  #   erb :'/posts/index'
-  # end
+    get '/posts' do
+    @posts = Post.all
+    erb :'/posts/index'
+  end
 
   get '/posts/new' do
     @topics = Topic.all
@@ -24,27 +24,38 @@ class PostsController < ApplicationController
 
 
 
-  # get '/posts/:id' do
-  #   @post = Post.find(params[:id])
-  #       @topics = Topic.all
-  #   erb :'/posts/show'
-  # end
+  get '/posts/:id' do
+    @post = Post.find(params[:id])
+    @topics = Topic.all
+    erb :'/posts/show'
+  end
 
   get '/posts/:id/edit' do
-    @post = Post.find_by_id(params[:id])
+   
+   @topic = Topic.find(params[:id])
     @topics = Topic.all
+     @posts = []
+    Post.all.each do |my_post|
+      if my_post.topic_id == @topic.id
+        @posts << my_post
+      end
+    end
+     
     erb :'/posts/edit'
   end
 
 
   post '/posts/:id' do
+        if @topic.user_id == current_user.id
+  
+    
     @post = Post.find(params[:id])
-    @post.update(params["post"])
-    if !params["topic"]["text"].empty?
-      @post.topic = Topic.create(text: params["topic"]["text"])
-    end
+    @post.text = "[#{current_user.username}] " +  params[:post][:text]
     @post.save
-    redirect to "posts/#{@post.id}"
+     else
+  flash[:error] = "You can ony update your posts!."
+end
+    redirect to "topics/#{@post.topic_id}"
   end
   
 end

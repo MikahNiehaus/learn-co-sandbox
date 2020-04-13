@@ -1,36 +1,26 @@
 <%require 'pry'%>
 <% if logged_in?%>
 
-<h1>Update Topic</h1>
-
-<form action="/topics/<%=@topic.id%>" method="POST">
-  <label>Text:</label>
-
-  <br></br>
-
-  <input type="text" name="topic[text]" id="topic_text" value="<%=@topic.text%>">
-  <br></br>
-  <label>Choose an existing post:</label>
-  <br></br>
-  <%binding.pry%>
-  <%     @topic = Topic.find(params[:id])%>
-    <% # if Post.find(params[:topic_id]) != nil  %> 
-    <% @posts = Post.find(params[:id]) %>
-    <% #end  %>
-  <%Post.all.each do |the_post|%>
-    <input type="checkbox" name="topic[post_ids][]" id="<%= the_post.id%>" value="<%=the_post.id%>" <%='checked' if @topic.posts.include?(the_post) %>><%=the_post.text%></input>
-  <%end%>
-
-  <br></br>
-
-  <label>and/or, create a new post:</label>
-  <br></br>
-  <label>text:</label>
-    <input  type="text" name="post[text]" id="post_text"></input>
-  <br></br>
-  <input type="submit" value="Update Topic">
-</form>
-  <p><a href="/topics/<%=@topic.id%>">Go Back</a></p>
+    <meta charset="utf-8">
+    <title>Edit</title>
+  </head>
+  <body>
+   
+    <form action="/topics/<%=@topic.id%>" method="POST">
+      <label>Choose a commit to edit:</label>
+       <br>
+     <% @posts.each do |topic| %>
+    
+  <input type="radio" name="post[topic_id]" value="<%=topic%>" ></input>
+    <label><%=topic.text%></label>
+     <br>
+  <% end %>
+     <br><br>
+       <input type="text" name="post[text]"></input>
+        <br>
+      <input type="submit" value="Update Post">
+    </form>
+  </body>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>

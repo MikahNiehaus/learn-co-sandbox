@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
   
 
   post '/topics' do
-     binding.pry
+    # binding.pry
     @topic = Topic.create(text: params[:topic][:text], user_id: params[:topic][:user_id])
     if !params["post"]["text"].empty?
       @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"], user_id: params[:post][:user_id])
@@ -25,8 +25,14 @@ class TopicsController < ApplicationController
   end
 
   get '/topics/:id/edit' do
-    @topic = Topic.find(params[:id])
-    # binding.pry
+    binding.pry
+     @topics = []
+    Topic.all.each do |my_topic|
+      if my_topic.topic_id == @topic.id
+        @topics << my_topic
+      end
+    end
+    
     erb :'/topics/edit'
   end
 

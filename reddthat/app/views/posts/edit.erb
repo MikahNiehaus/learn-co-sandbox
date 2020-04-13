@@ -1,26 +1,23 @@
+<%require 'pry'%>
 <% if logged_in?%>
 
     <meta charset="utf-8">
     <title>Edit</title>
   </head>
   <body>
-    <form action="/posts/<%=@post.id%>" method="post">
-      <label>Text:</label>
-      <br>
-      <input type="text" name="post[text]" value="<%=@post.text%>" id="post_text">
-      <br>
-      <label>Choose an existing topic:</label>
-      <br>
-         <%@topics.each do |topic|%>
-      <input type="radio" name="post[topic_id]" id="<%= topic.id %>" value="<%= topic.id %>" <%= 'checked' if @post.topic == topic %>><%= topic.text %></input>
-    <%end%>
-      <br>
-      <label>and/or, create a new topic:</label>
-      <br>
-      <label>Text:</label>
-      <br>
-      <input type="text" name="topic[text]" id="topic_text">
-      <br>
+   
+    <form action="/posts/<%=@topic.id%>" method="post">
+      <label>Choose a commit to edit:</label>
+       <br>
+     <% @posts.each do |topic| %>
+    
+  <input type="radio" name="post[topic_id]" value="<%=topic%>" ></input>
+    <label><%=topic.text%></label>
+     <br>
+  <% end %>
+     <br><br>
+       <input type="text" name="post[text]"></input>
+        <br>
       <input type="submit" value="Update Post">
     </form>
   </body>
