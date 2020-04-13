@@ -15,9 +15,9 @@
   <%binding.pry%>
   <%     @topic = Topic.find(params[:id])%>
     <% # if Post.find(params[:topic_id]) != nil  %> 
-    <% @posts = Post.find(params[:topic_id]) %>
+    <% @posts = Post.find(params[:id]) %>
     <% #end  %>
-  <%@posts.all.each do |the_post|%>
+  <%Post.all.each do |the_post|%>
     <input type="checkbox" name="topic[post_ids][]" id="<%= the_post.id%>" value="<%=the_post.id%>" <%='checked' if @topic.posts.include?(the_post) %>><%=the_post.text%></input>
   <%end%>
 

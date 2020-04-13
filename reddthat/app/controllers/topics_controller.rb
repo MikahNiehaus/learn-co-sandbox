@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
     if !params["post"]["text"].empty?
       @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"], user_id: params[:post][:user_id])
     end
+    
     @topic.save 
     redirect "topics/#{@topic.id}"
   end
@@ -56,7 +57,7 @@ class TopicsController < ApplicationController
     # end
      @topic.save
       else
-  flash[:error] = "."
+  flash[:error] = "error."
 end
     redirect to "topics/#{@topic.id}"
   end
