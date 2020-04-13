@@ -27,9 +27,9 @@
 
 
 <form action="/topics/<%=@topic.id%>" method="POST">
- 
+ <br>
  <label>Update Topic:</label>
-  <br></br>
+  </br>
   <input type="hidden" name="topic[user_id]" value="<%=current_user.id%>"></input>
  <label>Text:</label>
   <input type="text" name="topic[text]" id="topic_text" value="<%=@topic.text%>">

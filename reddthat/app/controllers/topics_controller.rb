@@ -14,8 +14,8 @@ class TopicsController < ApplicationController
   
 
   post '/topics' do
-    # binding.pry
-    @topic = Topic.create(text: params[:topic][:text],user_id: params[:topic][:user_id])
+     binding.pry
+    @topic = Topic.create(text: params[:topic][:text], user_id: params[:topic][:user_id])
     if !params["post"]["text"].empty?
       @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"], user_id: params[:post][:user_id])
     end
@@ -36,21 +36,25 @@ class TopicsController < ApplicationController
 #make it update topics only
   post '/topics/:id' do
     # binding.pry
-  if Topic.find(params[:topic][:user_id]) == current_user.id
+       @topic = Topic.find(params[:id])
+      
+  if @topic.user_id == current_user.id
   
-    @topic = Topic.find(params[:id])
-    @topic.update(params["topic"])
-    if !params["post"]["text"].empty?
-      @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"])
-      # binding.pry
+    if !params["topic"]["text"].empty?
+         @topic.update(params["topic"])
+      # @topic = (text: params["topic"]["text"])
     end
+    # if !params["post"]["text"].empty?
+      # @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"])
       # binding.pry
-      # @topic = Topic.find(params[:post][:id])
+    # end
+      # binding.pry
+    #   @topic = Topic.find(params[:post][:id])
    
     # if !params["topic"]["text"].empty?
     #   @topic.posts << Post.create(text: "[#{current_user.username}] " + params["topic"]["text"])
     # end
-    # @topic.save
+     @topic.save
       else
   flash[:error] = "."
 end
