@@ -54,6 +54,7 @@ class PostsController < ApplicationController
 
 
   post '/posts/:id' do
+    binding.pry
     # binding.pry
     @post = Post.find(params[:post][:post_id])
     @post.text = "[#{current_user.username}] " +  params[:post][:text]

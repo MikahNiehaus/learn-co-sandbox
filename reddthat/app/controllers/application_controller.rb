@@ -2,7 +2,8 @@ class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
-  
+  enable :sessions
+  require 'sinatra/flash'
    configure do
     set :views, "app/views"
     enable :sessions
@@ -16,21 +17,30 @@ class ApplicationController < Sinatra::Base
   get "/signup" do
     erb :signup
   end
+  
 
+ def new_username?(u)
+    all = User.all
+    all.each do |user|
+      if user.username == u
+       return false
+       break
+    end
+  end
+    return true
+ end
   post "/signup" do
+  if new_username?(params[:username])
     if params[:username] == "" || params[:password] == ""
       redirect to "/failure"
     else
       User.create(:username => params[:username], :password => params[:password])
       redirect to "/login"
     end
+  else
+    flash[:notice] = "Hooray, Flash is working!"
   end
-  
-
-  # get '/account' do
-  #   @user = User.find(session[:user_id])
-  #   erb :account
-  # end
+  end
 
 
   get "/login" do
