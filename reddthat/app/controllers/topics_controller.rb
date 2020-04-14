@@ -11,7 +11,23 @@ class TopicsController < ApplicationController
     erb :'/topics/new'
   end
 
+   post '/topics/:id' do
+    # binding.pry
+       @topic = Topic.find(params[:id])
+      
+  if @topic.user_id == current_user.id
   
+    if !params["topic"]["text"].empty?
+         @topic.update(params["topic"])
+      # @topic = (text: params["topic"]["text"])
+    end
+  
+     @topic.save
+      else
+  flash[:error] = "error."
+end
+    redirect to "topics/#{@topic.id}"
+  end
 
   post '/topics' do
     # binding.pry
@@ -24,7 +40,7 @@ class TopicsController < ApplicationController
     redirect "topics/#{@topic.id}"
   end
 
-  post '/delete/:id' do
+  post '/topics/delete/:id' do
   # binding.pry
    @topic = Topic.find(params[:id])
    @topic.delete
@@ -38,33 +54,7 @@ class TopicsController < ApplicationController
     erb :'/topics/show'
   end
   
-#make it update topics only
-  post '/topics/:id' do
-    # binding.pry
-       @topic = Topic.find(params[:id])
-      
-  if @topic.user_id == current_user.id
-  
-    if !params["topic"]["text"].empty?
-         @topic.update(params["topic"])
-      # @topic = (text: params["topic"]["text"])
-    end
-    # if !params["post"]["text"].empty?
-      # @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"])
-      # binding.pry
-    # end
-      # binding.pry
-    #   @topic = Topic.find(params[:post][:id])
-   
-    # if !params["topic"]["text"].empty?
-    #   @topic.posts << Post.create(text: "[#{current_user.username}] " + params["topic"]["text"])
-    # end
-     @topic.save
-      else
-  flash[:error] = "error."
-end
-    redirect to "topics/#{@topic.id}"
-  end
+
   
   
 end

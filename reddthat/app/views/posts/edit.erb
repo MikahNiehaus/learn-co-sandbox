@@ -6,26 +6,45 @@
   </head>
   <body>
    
-    <form action="/topics/<%=@topic.id%>" method="POST">
+    <form action="/posts/<%=@topic.id%>" method="POST">
       <label>Choose a commit to edit:</label>
        <br>
-     <% @posts.each do |topic| %>
+     <% @posts.each do |my_post| %>
     
-  <input type="radio" name="post[topic_id]" value="<%=topic%>" ></input>
-    <label><%=topic.text%></label>
+  <input type="radio" name="post[post_id]" value="<%=my_post.id%>" ></input>
+    <label><%=my_post.text%></label>
      <br>
   <% end %>
-     <br><br>
+     <br>
+    
        <input type="text" name="post[text]"></input>
         <br>
       <input type="submit" value="Update Post">
     </form>
   </body>
+  
   </form>
-  <form action="/delete/<%=@post.id%>" method="POST">
-
-  <input type="submit" value="Delete">
-</form>
+ <br><br>
+  <form action="/posts/delete/<%=@topic.id%>" method="POST">
+      <label>Choose a commit to edit:</label>
+       <br>
+     <% @posts.each do |my_post| %>
+ 
+  <input type="radio" name="delete[id]" value="<%=my_post.id%>" ></input>
+    <label><%=my_post.text%></label>
+     <br>
+  <% end %>
+     
+     <br>
+     
+      <input type="submit" value="Delete">
+    </form>
+  </body>
+  
+  </form>
+   <%#binding.pry%>
+   <br>
+   <p><a href="/topics/<%=@topic.id%>">Done</a></p>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>

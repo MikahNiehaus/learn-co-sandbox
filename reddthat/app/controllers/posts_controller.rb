@@ -21,14 +21,16 @@ class PostsController < ApplicationController
     @topics = Topic.all
     erb :'/posts/new'
   end
+  
+  
 
- post '/delete/:id' do
-  # binding.pry
-   @post = Post.find(params[:id])
-   @post.delete
+# post '/delete/:id' do
+#   # binding.pry
+#   @post = Post.find(params[:id])
+#   @post.delete
     
-     redirect to "/topics/#{@post.topic_id}"
-  end
+#     redirect to "/topics/#{@post.topic_id}"
+#   end
 
   # post '/delete/:id' do
   #   @post = Post.find(params[:id])
@@ -52,16 +54,20 @@ class PostsController < ApplicationController
 
 
   post '/posts/:id' do
-        if @topic.user_id == current_user.id
-  
-    
-    @post = Post.find(params[:id])
+    # binding.pry
+    @post = Post.find(params[:post][:post_id])
     @post.text = "[#{current_user.username}] " +  params[:post][:text]
     @post.save
-     else
-  flash[:error] = "You can ony update your posts!."
-end
-    redirect to "topics/#{@post.topic_id}"
+    redirect to "posts/#{@post.topic_id}/edit"
+  end
+  
+  
+   post '/posts/delete/:id' do
+  # binding.pry
+   @post = Post.find(params[:delete][:id])
+   @post.delete
+    
+     redirect to "/posts/#{params[:id]}/edit"
   end
   
 end
