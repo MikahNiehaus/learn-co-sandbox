@@ -6,7 +6,7 @@
   </head>
   <body>
    
-    <form action="/posts/<%=@topic.id%>" method="post">
+    <form action="/topics/<%=@topic.id%>" method="POST">
       <label>Choose a commit to edit:</label>
        <br>
      <% @posts.each do |topic| %>
@@ -21,6 +21,11 @@
       <input type="submit" value="Update Post">
     </form>
   </body>
+  </form>
+  <form action="/delete/<%=@post.id%>" method="POST">
+
+  <input type="submit" value="Delete">
+</form>
 <% else %>
 <% redirect to "/failure" %>
 <% end %>

@@ -1,0 +1,25 @@
+<%require 'pry'%>
+<% if logged_in?%>
+
+    <meta charset="utf-8">
+    <title>Edit</title>
+  </head>
+  <body>
+   
+    <form action="/topics/delete" method="POST">
+      <label>Choose a commit to edit:</label>
+       <br>
+     <% @topics.each do |topic| %>
+    
+  <input type="radio" name="topic_id[id]" value="<%=topic%>" ></input>
+    <label><%=topic.text%></label>
+     <br>
+  <% end %>
+     
+        <br>
+      <input type="submit" value="Update Topic">
+    </form>
+  </body>
+<% else %>
+<% redirect to "/failure" %>
+<% end %>

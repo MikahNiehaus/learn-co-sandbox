@@ -22,13 +22,19 @@ class PostsController < ApplicationController
     erb :'/posts/new'
   end
 
-
-
-  get '/posts/:id' do
-    @post = Post.find(params[:id])
-    @topics = Topic.all
-    erb :'/posts/show'
+ post '/delete/:id' do
+  # binding.pry
+   @post = Post.find(params[:id])
+   @post.delete
+    
+     redirect to "/topics/#{@post.topic_id}"
   end
+
+  # post '/delete/:id' do
+  #   @post = Post.find(params[:id])
+  #   @topics = Topic.all
+  #   erb :'/posts/show'
+  # end
 
   get '/posts/:id/edit' do
    

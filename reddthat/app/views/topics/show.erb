@@ -35,6 +35,13 @@
   <input type="text" name="topic[text]" id="topic_text" value="<%=@topic.text%>">
     <br>  <input type="submit" value="Update Topic">
 </br>
+</form>
+
+<form action="/delete/<%=@topic.id%>" method="POST">
+
+  <input type="submit" value="Delete">
+</form>
+
   <p><a href="/posts/<%=@topic.id%>/edit">Edit Post</a></p>
 <p><a href="/topics">Go Back</a></p>
 <p><a href="/">Return To Home Page</a></p>

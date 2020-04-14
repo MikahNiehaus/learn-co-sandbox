@@ -24,22 +24,20 @@ class TopicsController < ApplicationController
     redirect "topics/#{@topic.id}"
   end
 
-  get '/topics/:id/edit' do
-    binding.pry
-     @topics = []
-    Topic.all.each do |my_topic|
-      if my_topic.topic_id == @topic.id
-        @topics << my_topic
-      end
-    end
+  post '/delete/:id' do
+  # binding.pry
+   @topic = Topic.find(params[:id])
+   @topic.delete
     
-    erb :'/topics/edit'
+     redirect to "/topics"
   end
+
 
   get '/topics/:id' do
     @topic = Topic.find(params[:id])
     erb :'/topics/show'
   end
+  
 #make it update topics only
   post '/topics/:id' do
     # binding.pry
