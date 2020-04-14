@@ -1,11 +1,9 @@
 require 'pry'
 class PostsController < ApplicationController
 
+# used in creating a new post
  post '/posts' do
-  # binding.pry
     @topic = Topic.find(params[:post][:topic_id])
-    
-    # binding.pry
     if !params["post"]["text"].empty?
       @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"], user_id: params["post"]["user_id"])
     end
@@ -22,29 +20,13 @@ class PostsController < ApplicationController
     erb :'/posts/new'
   end
   
-  
-
-# post '/delete/:id' do
-#   # binding.pry
-#   @post = Post.find(params[:id])
-#   @post.delete
-    
-#     redirect to "/topics/#{@post.topic_id}"
-#   end
-
-  # post '/delete/:id' do
-  #   @post = Post.find(params[:id])
-  #   @topics = Topic.all
-  #   erb :'/posts/show'
-  # end
-
+  # used in edit post function
   get '/posts/:id/edit' do
-   
    @topic = Topic.find(params[:id])
     @topics = Topic.all
      @posts = []
     Post.all.each do |my_post|
-      if my_post.topic_id == @topic.id
+      if my_post.topic_id == @topic.id && my_post.user_id == current_user.id
         @posts << my_post
       end
     end
@@ -52,19 +34,21 @@ class PostsController < ApplicationController
     erb :'/posts/edit'
   end
 
-
+# eddits the post text
   post '/posts/:id' do
-    binding.pry
-    # binding.pry
+  if params[:post][:text] != ""
     @post = Post.find(params[:post][:post_id])
     @post.text = "[#{current_user.username}] " +  params[:post][:text]
     @post.save
-    redirect to "posts/#{@post.topic_id}/edit"
+   
+  else
+    #error: you need new post text
+  end
+   redirect to "posts/#{@post.topic_id}/edit"
   end
   
-  
+  # used to delete post
    post '/posts/delete/:id' do
-  # binding.pry
    @post = Post.find(params[:delete][:id])
    @post.delete
     

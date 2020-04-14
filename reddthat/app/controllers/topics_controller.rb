@@ -11,10 +11,10 @@ class TopicsController < ApplicationController
     erb :'/topics/new'
   end
 
+# used in updating topic
    post '/topics/:id' do
-    # binding.pry
+     if params[:topic][:text] != ""
        @topic = Topic.find(params[:id])
-      
   if @topic.user_id == current_user.id
   
     if !params["topic"]["text"].empty?
@@ -26,11 +26,15 @@ class TopicsController < ApplicationController
       else
   flash[:error] = "error."
 end
-    redirect to "topics/#{@topic.id}"
+   
+  else
+    #error: you need a new topic
+  end
+   redirect to "topics/#{@topic.id}"
   end
 
+# used to create new topic
   post '/topics' do
-    # binding.pry
     @topic = Topic.create(text: params[:topic][:text], user_id: params[:topic][:user_id])
     if !params["post"]["text"].empty?
       @topic.posts << Post.create(text: "[#{current_user.username}] " + params["post"]["text"], user_id: params[:post][:user_id])
@@ -39,16 +43,21 @@ end
     @topic.save 
     redirect "topics/#{@topic.id}"
   end
-
+# used to delete topic
   post '/topics/delete/:id' do
-  # binding.pry
-   @topic = Topic.find(params[:id])
+    @topic = Topic.find(params[:id])
+   if @topic.user_id == current_user.id
+
    @topic.delete
-    
-     redirect to "/topics"
+   redirect to "/topics"
+ else
+   #error: you can only delete topics you make
+    redirect to "/topics/#{params[:id]}"
+ end
+ 
   end
 
-
+# used to create new topic
   get '/topics/:id' do
     @topic = Topic.find(params[:id])
     erb :'/topics/show'
