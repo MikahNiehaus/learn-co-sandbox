@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
       redirect to "/login"
     end
   else
-   # flash[:notice] = "Hooray, Flash is working!"
+   session[:error_message] = "Error: username has been used."
   end
   end
 

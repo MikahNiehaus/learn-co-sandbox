@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
 end
    
   else
-    #error: you need a new topic
+     session[:error_message] = "Error: you need a new topic"
   end
    redirect to "topics/#{@topic.id}"
   end
@@ -51,7 +51,7 @@ end
    @topic.delete
    redirect to "/topics"
  else
-   #error: you can only delete topics you make
+    session[:error_message] = "Error: you can only delete topics you make"
     redirect to "/topics/#{params[:id]}"
  end
  

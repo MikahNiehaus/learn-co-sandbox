@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     @post.save
    
   else
-    #error: you need new post text
+     session[:error_message] = "Error: you need new post text"
   end
    redirect to "posts/#{@post.topic_id}/edit"
   end
