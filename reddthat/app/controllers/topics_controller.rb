@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
   
      @topic.save
       else
-  flash[:error] = "error."
+  # flash[:error] = "error."
 end
    
   else
