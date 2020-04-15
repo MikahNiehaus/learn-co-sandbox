@@ -44,7 +44,9 @@ class PostsController < ApplicationController
   else
     # session[:error_message] = "Error: you need new post text"
   end
-   redirect to "posts/#{@post.topic_id}/edit"
+ 
+   redirect to "posts/#{params[:id]}/edit"
+   
   end
   
   # used to delete post

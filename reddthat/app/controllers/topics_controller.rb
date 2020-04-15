@@ -30,7 +30,7 @@ end
   else
     # session[:error_message] = "Error: you need a new topic"
   end
-   redirect to "topics/#{@topic.id}"
+   redirect to "topics/#{params[:id]}"
   end
 
 # used to create new topic
