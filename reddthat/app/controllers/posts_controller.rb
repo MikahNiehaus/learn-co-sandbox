@@ -51,9 +51,11 @@ class PostsController < ApplicationController
   
   # used to delete post
    post '/posts/delete/:id' do
-   @post = Post.find(params[:delete][:id])
+begin
+  @post = Post.find(params[:delete][:id])
    @post.delete
-    
+rescue StandardError => bang
+end
      redirect to "/posts/#{params[:id]}/edit"
   end
   
