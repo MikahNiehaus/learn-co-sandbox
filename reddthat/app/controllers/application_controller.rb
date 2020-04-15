@@ -1,9 +1,12 @@
+require 'sinatra/flash' 
+enable :sessions
+
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
-  enable :sessions
-  require 'sinatra/flash'
+
+
    configure do
     set :views, "app/views"
     enable :sessions
@@ -38,7 +41,7 @@ class ApplicationController < Sinatra::Base
       redirect to "/login"
     end
   else
-    flash[:notice] = "Hooray, Flash is working!"
+   # flash[:notice] = "Hooray, Flash is working!"
   end
   end
 
