@@ -1,7 +1,29 @@
 require 'pry'
 class PostsController < ApplicationController
 
+#get '/' do
+#   .. show something ..
+# end
+
+# post '/' do
+#   .. create something ..
+# end
+
+# put '/' do
+#   .. replace something ..
+# end
+
+# patch '/' do
+#   .. modify something ..
+# end
+
+# delete '/' do
+#   .. annihilate something ..
+# end
+
+
 # used in creating a new post
+#   .. create something ..
  post '/posts' do
     @topic = Topic.find(params[:post][:topic_id])
     if !params["post"]["text"].empty?
@@ -10,11 +32,13 @@ class PostsController < ApplicationController
     @topic.save
     redirect "topics/#{@topic.id}"
   end
+  
+  #   .. show something ..
     get '/posts' do
     @posts = Post.all
     erb :'/posts/index'
   end
-
+#   .. show something ..
   get '/posts/new' do
     @topics = Topic.all
     erb :'/posts/new'
@@ -30,11 +54,12 @@ class PostsController < ApplicationController
         @posts << my_post
       end
     end
-     
+      #Use ERB substitution and scripting tags to modify the content and structure of HTML code
     erb :'/posts/edit'
   end
 
 # eddits the post text
+#   .. modify something ..
   patch '/posts/:id' do
   if params[:post][:text] != ""
     @post = Post.find(params[:post][:post_id])
