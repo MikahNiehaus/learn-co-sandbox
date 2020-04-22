@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
   end
 
 # used in updating topic
-   post '/topics/:id' do
+   patch '/topics/:id' do
      if params[:topic][:text] != ""
        @topic = Topic.find(params[:id])
   if @topic.user_id == current_user.id

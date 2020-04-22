@@ -33,6 +33,7 @@
   <input type="hidden" name="topic[user_id]" value="<%=current_user.id%>"></input>
  <label>Text:</label>
   <input type="text" name="topic[text]" id="topic_text" value="<%=@topic.text%>">
+  <input type="hidden" value="patch" name="_method">
     <br>  <input type="submit" value="Update Topic">
 </br>
 </form>

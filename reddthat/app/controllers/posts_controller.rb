@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   end
 
 # eddits the post text
-  post '/posts/:id' do
+  patch '/posts/:id' do
   if params[:post][:text] != ""
     @post = Post.find(params[:post][:post_id])
     @post.text = "[#{current_user.username}] " +  params[:post][:text]
