@@ -23,6 +23,8 @@ class TopicsController < ApplicationController
 
 #   .. show something ..
   get '/topics' do
+    #if you do not queriry anything you will at least get status code
+    #EX: 200 255 0.0165
    @topics = Topic.all
    erb :'/topics/index'
   end 
