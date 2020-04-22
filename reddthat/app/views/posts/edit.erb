@@ -26,11 +26,13 @@
   </form>
  <br><br>
   <form action="/posts/delete/<%=@topic.id%>" method="POST">
+    
       <label>Choose a commit to edit:</label>
        <br>
      <% @posts.each do |my_post| %>
- 
-  <input type="radio" name="delete[id]" value="<%=my_post.id%>" ></input>
+ <!--name="delete[id]"  -->
+  <input type="radio"  name="delete[id]"  value="<%=my_post.id%>"  ></input>
+  <input name="_method" type="hidden" value="delete">
     <label><%=my_post.text%></label>
      <br>
   <% end %>

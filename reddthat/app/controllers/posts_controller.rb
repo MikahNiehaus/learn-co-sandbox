@@ -50,7 +50,8 @@ class PostsController < ApplicationController
   end
   
   # used to delete post
-   post '/posts/delete/:id' do
+   delete '/posts/delete/:id' do
+    # binding.pry
 begin
   @post = Post.find(params[:delete][:id])
    @post.delete

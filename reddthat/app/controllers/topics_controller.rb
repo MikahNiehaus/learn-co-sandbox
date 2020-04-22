@@ -44,7 +44,16 @@ end
     redirect "topics/#{@topic.id}"
   end
 # used to delete topic
-  post '/topics/delete/:id' do
+  
+
+# used to create new topic
+  get '/topics/:id' do
+    @topic = Topic.find(params[:id])
+    erb :'/topics/show'
+  end
+  
+delete '/topics/delete/:id' do
+  # binding.pry
     @topic = Topic.find(params[:id])
    if @topic.user_id == current_user.id
 
@@ -56,14 +65,6 @@ end
  end
  
   end
-
-# used to create new topic
-  get '/topics/:id' do
-    @topic = Topic.find(params[:id])
-    erb :'/topics/show'
-  end
-  
-
   
   
 end

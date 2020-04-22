@@ -38,7 +38,7 @@
 </form>
 
 <form action="/topics/delete/<%=@topic.id%>" method="POST">
-
+ <input name="_method" type="hidden" value="delete">
   <input type="submit" value="Delete">
 </form>
 
